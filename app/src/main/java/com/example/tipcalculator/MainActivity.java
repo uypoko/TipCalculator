@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     float percentage = 0;
     float tipTotal = 0;
     float finalBillAmount = 0;
+    float billAmount = 0;
+    final float FINE_TIP_PERCENT = 10;
+    final float GOOD_TIP_PERCENT = 15;
+    final float GREAT_TIP_PERCENT = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +50,31 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ibFineService:
+                percentage = FINE_TIP_PERCENT;
                 break;
             case R.id.ibGoodService:
+                percentage = GOOD_TIP_PERCENT;
                 break;
             case R.id.ibGreatService:
+                percentage = GREAT_TIP_PERCENT;
                 break;
         }
+    }
+
+    @OnTextChanged(R.id.edBillAmount)
+    public void onTextChange() {
+        calculateFinalBill();
+        setTipValues();
+    }
+
+    private void calculateFinalBill() {
+        if (percentage == 0)
+            percentage = FINE_TIP_PERCENT;
+        if (!edBillAmount.getText().toString().equals(""))
+            billAmount = Float.valueOf(edBillAmount.getText().toString());
+        else
+            billAmount = 0;
+        tipTotal = billAmount*percentage/100;
+        finalBillAmount = billAmount + tipTotal;
     }
 }
