@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
                 percentage = GREAT_TIP_PERCENT;
                 break;
         }
+        calculateFinalBill();
+        setTipValues();
     }
 
     @OnTextChanged(R.id.edBillAmount)
