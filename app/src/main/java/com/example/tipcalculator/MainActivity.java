@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         if (savedInstanceState != null) {
-            percentage = Float.parseFloat(savedInstanceState.getString("percentage"));
-            tipTotal = Float.parseFloat(savedInstanceState.getString("tipTotal"));
-            finalBillAmount = Float.parseFloat(savedInstanceState.getString("finalBillAmount"));
+            percentage = savedInstanceState.getFloat("percentage");
+            tipTotal = savedInstanceState.getFloat("tipTotal");
+            finalBillAmount = savedInstanceState.getFloat("finalBillAmount");
         }
 
         setTipValues();
@@ -88,9 +88,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putString("percentage", String.valueOf(percentage));
-        outState.putString("tipTotal", String.valueOf(tipTotal));
-        outState.putString("finalBillAmount", String.valueOf(finalBillAmount));
+        outState.putFloat("percentage", percentage);
+        outState.putFloat("percentage", tipTotal);
+        outState.putFloat("percentage", finalBillAmount);
         super.onSaveInstanceState(outState);
     }
 }
