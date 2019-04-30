@@ -37,6 +37,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        if (savedInstanceState != null) {
+            percentage = Float.parseFloat(savedInstanceState.getString("percentage"));
+            tipTotal = Float.parseFloat(savedInstanceState.getString("tipTotal"));
+            finalBillAmount = Float.parseFloat(savedInstanceState.getString("finalBillAmount"));
+        }
+
         setTipValues();
     }
 
@@ -78,5 +84,13 @@ public class MainActivity extends AppCompatActivity {
             billAmount = 0;
         tipTotal = billAmount*percentage/100;
         finalBillAmount = billAmount + tipTotal;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString("percentage", String.valueOf(percentage));
+        outState.putString("tipTotal", String.valueOf(tipTotal));
+        outState.putString("finalBillAmount", String.valueOf(finalBillAmount));
+        super.onSaveInstanceState(outState);
     }
 }
